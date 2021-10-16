@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { OfficeAuthModule } from './modules/auth/office-auth.module';
+import { TodoModule } from './modules/todo/todo.module';
 
 export const mainSwaggerApp = (app: INestApplication): void => {
   const mainSwaggerConfig = new DocumentBuilder()
@@ -10,7 +11,7 @@ export const mainSwaggerApp = (app: INestApplication): void => {
     .addBearerAuth()
     .build();
   const mainDoc = SwaggerModule.createDocument(app, mainSwaggerConfig, {
-    include: [OfficeAuthModule],
+    include: [OfficeAuthModule, TodoModule],
   });
   SwaggerModule.setup('api-docs', app, mainDoc);
 };

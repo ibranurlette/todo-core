@@ -8,6 +8,7 @@ import { OfficeAuthModule } from './modules/auth/office-auth.module';
 import { OfficeJwtStrategy } from './commons/strategies/office-jwt.strategy';
 import { AdminSeedModule } from './modules/seeds/admin-seed/admin-seed.module';
 import { TodoSeedModule } from './modules/seeds/todo-seed/todo-seed.module';
+import { TodoModule } from './modules/todo/todo.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TodoSeedModule } from './modules/seeds/todo-seed/todo-seed.module';
     AdminSeedModule,
     TodoSeedModule,
     OfficeAuthModule,
+    TodoModule,
   ],
   controllers: [AppController],
   providers: [AppService, OfficeJwtStrategy],
