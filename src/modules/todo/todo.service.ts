@@ -22,4 +22,7 @@ export class TodoService {
   async removeTodo(id: string) {
     return await this.todoRepository.removeTodo(id);
   }
+  async detailTodo(id: string) {
+    return await this.todoRepository.detailTodo(id);
+  }
 }

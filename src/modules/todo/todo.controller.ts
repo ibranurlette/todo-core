@@ -71,4 +71,12 @@ export class TodoController {
   async delete(@Param('id') id: string) {
     return await this.todoService.removeTodo(id);
   }
+
+  @ApiOperation({ summary: 'detail todo' })
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
+  @Get(':id')
+  async detail(@Param('id') id: string) {
+    return await this.todoService.detailTodo(id);
+  }
 }

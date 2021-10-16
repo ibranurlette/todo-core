@@ -73,4 +73,18 @@ export class TodoRepository extends Repository<Todo> {
     }
     return todo;
   }
+
+  async detailTodo(id: string): Promise<Todo> {
+    const todo = await this.findOne({
+      where: { id },
+    });
+    if (!todo || todo.deleted_at) {
+      throw new HttpException(
+        { message: 'Data tidak ditemukan' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return todo;
+  }
 }
