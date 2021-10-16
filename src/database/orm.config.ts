@@ -7,7 +7,7 @@ const localConfig: TypeOrmModuleOptions = {
   port: 5433,
   username: 'postgres',
   password: 'postgres',
-  database: 'todoApp-core',
+  database: 'todo-core',
   entities: ['dist/database/**/**/*.entity.js', 'dist/database/**/*.entity.js'],
   synchronize: false,
 };

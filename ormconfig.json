@@ -4,7 +4,7 @@
   "port": 5433,
   "username": "postgres",
   "password": "postgres",
-  "database": "todoApp-core",
+  "database": "todo-core",
   "entities": ["dist/database/entities/**/*.entity.js"],
   "synchronize": false,
   "migrations": ["dist/database/migrations/*.js"],

@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AdminSeedModule } from './modules/seeds/admin-seed/admin-seed.module';
+import { TodoSeedModule } from './modules/seeds/todo-seed/todo-seed.module';
 
 export const seedSwaggerApp = (app: INestApplication): void => {
   const mainSwaggerConfig = new DocumentBuilder()
@@ -10,7 +11,7 @@ export const seedSwaggerApp = (app: INestApplication): void => {
     .addBearerAuth()
     .build();
   const mainDoc = SwaggerModule.createDocument(app, mainSwaggerConfig, {
-    include: [AdminSeedModule],
+    include: [AdminSeedModule, TodoSeedModule],
   });
   SwaggerModule.setup('api-seed-docs', app, mainDoc);
 };
