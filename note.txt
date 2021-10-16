@@ -1,0 +1,5 @@
+how to craete file migrations initDb : typeorm migration:generate -n namanya
+how to run migration : yarn run typeorm migration:run
+how to revert migration : yarn run typeorm migration:revert
+
+
