@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TodoRepository } from 'src/commons/repositories/todo/todo.repositories';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
+import { TodoDto } from './dto/todo.dto';
 
 @Injectable()
 export class TodoService {
@@ -11,11 +10,11 @@ export class TodoService {
     private readonly todoRepository: TodoRepository,
   ) {}
 
-  async createTodo(args: CreateTodoDto) {
+  async createTodo(args: TodoDto) {
     return await this.todoRepository.createTodo(args);
   }
 
-  async updateTodo(id: string, args: UpdateTodoDto) {
+  async updateTodo(id: string, args: TodoDto) {
     return await this.todoRepository.updateTodo(id, args);
   }
 

@@ -1,10 +1,4 @@
-export interface ICreateTodo {
+export interface ITodo {
   name: string;
   description: string;
-}
-
-export interface IUpdateTodo {
-  name: string;
-  description: string;
-  is_done: boolean;
 }

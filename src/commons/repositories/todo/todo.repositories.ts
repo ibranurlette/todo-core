@@ -1,14 +1,11 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-import {
-  ICreateTodo,
-  IUpdateTodo,
-} from 'src/commons/interfaces/todo/todo.interface';
+import { ITodo } from 'src/commons/interfaces/todo/todo.interface';
 import { Todo } from 'src/database/entities/todo/todo.entity';
 import { EntityRepository, Repository } from 'typeorm';
 
 @EntityRepository(Todo)
 export class TodoRepository extends Repository<Todo> {
-  async createTodo(args: ICreateTodo): Promise<Todo> {
+  async createTodo(args: ITodo): Promise<Todo> {
     const newTodo = this.create();
 
     newTodo.name = args.name;
@@ -26,7 +23,7 @@ export class TodoRepository extends Repository<Todo> {
     return newTodo;
   }
 
-  async updateTodo(id: string, args: IUpdateTodo): Promise<Todo> {
+  async updateTodo(id: string, args: ITodo): Promise<Todo> {
     const todo = await this.findOne({
       where: { id },
     });
@@ -39,7 +36,6 @@ export class TodoRepository extends Repository<Todo> {
 
     todo.name = args.name;
     todo.description = args.description;
-    todo.is_done = args.is_done;
 
     try {
       await todo.save();

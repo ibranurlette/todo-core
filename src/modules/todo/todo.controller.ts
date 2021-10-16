@@ -13,8 +13,7 @@ import { ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { TodoAuthGuard } from 'src/commons/guards/todo-auth.guard';
 import { IReqQueryTodo, TodosListService } from './todo-list.service';
 import { TodoService } from './todo.service';
-import { CreateTodoDto } from './dto/create-todo.dto';
-import { UpdateTodoDto } from './dto/update-todo.dto';
+import { TodoDto } from './dto/todo.dto';
 
 @Controller('todo')
 export class TodoController {
@@ -52,7 +51,7 @@ export class TodoController {
   // @ApiBearerAuth()
   // @UseGuards(TodoAuthGuard)
   @Post()
-  async create(@Body() args: CreateTodoDto) {
+  async create(@Body() args: TodoDto) {
     return await this.todoService.createTodo(args);
   }
 
@@ -60,7 +59,7 @@ export class TodoController {
   // @ApiBearerAuth()
   // @UseGuards(TodoAuthGuard)
   @Put(':id')
-  async update(@Param('id') id: string, @Body() args: UpdateTodoDto) {
+  async update(@Param('id') id: string, @Body() args: TodoDto) {
     return await this.todoService.updateTodo(id, args);
   }
 
