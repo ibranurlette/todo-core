@@ -83,4 +83,28 @@ export class TodoRepository extends Repository<Todo> {
 
     return todo;
   }
+
+  async updateStatusTodo(id: string): Promise<Todo> {
+    const todo = await this.findOne({
+      where: { id },
+    });
+    if (!todo || todo.deleted_at) {
+      throw new HttpException(
+        { message: 'Data tidak ditemukan' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    todo.is_done = true;
+
+    try {
+      await todo.save();
+    } catch (error) {
+      throw new HttpException(
+        { message: 'Failed update status todo' },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    return todo;
+  }
 }

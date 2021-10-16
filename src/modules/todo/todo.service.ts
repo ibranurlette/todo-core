@@ -24,4 +24,7 @@ export class TodoService {
   async detailTodo(id: string) {
     return await this.todoRepository.detailTodo(id);
   }
+  async updateStatusTodo(id: string) {
+    return await this.todoRepository.updateStatusTodo(id);
+  }
 }

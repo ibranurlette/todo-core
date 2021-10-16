@@ -8,6 +8,7 @@ import {
   Get,
   Query,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { TodoAuthGuard } from 'src/commons/guards/todo-auth.guard';
@@ -77,5 +78,13 @@ export class TodoController {
   @Get(':id')
   async detail(@Param('id') id: string) {
     return await this.todoService.detailTodo(id);
+  }
+
+  @ApiOperation({ summary: 'update status todo' })
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
+  @Patch(':id')
+  async updateStatus(@Param('id') id: string) {
+    return await this.todoService.updateStatusTodo(id);
   }
 }
