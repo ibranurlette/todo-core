@@ -7,6 +7,7 @@ import {
   Put,
   Get,
   Query,
+  Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { TodoAuthGuard } from 'src/commons/guards/todo-auth.guard';
@@ -40,46 +41,34 @@ export class TodoController {
   @ApiQuery({ name: 'sort_value', type: 'string', required: false })
   @ApiQuery({ name: 'limit', type: 'string', required: false })
   @ApiQuery({ name: 'page', type: 'string', required: false })
-  @ApiBearerAuth()
-  @UseGuards(TodoAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
   @Get()
   async list(@Query() query: IReqQueryTodo) {
     return await this.todosListService.list(query);
   }
 
   @ApiOperation({ summary: 'create todo' })
-  @ApiBearerAuth()
-  @UseGuards(TodoAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
   @Post()
   async create(@Body() args: CreateTodoDto) {
     return await this.todoService.createTodo(args);
   }
 
   @ApiOperation({ summary: 'update todo' })
-  @ApiBearerAuth()
-  @UseGuards(TodoAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() args: UpdateTodoDto) {
     return await this.todoService.updateTodo(id, args);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.todoService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.todoService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-  //   return this.todoService.update(+id, updateTodoDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.todoService.remove(+id);
-  // }
+  @ApiOperation({ summary: 'delete todo' })
+  // @ApiBearerAuth()
+  // @UseGuards(TodoAuthGuard)
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return await this.todoService.removeTodo(id);
+  }
 }

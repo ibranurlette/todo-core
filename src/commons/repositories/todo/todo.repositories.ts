@@ -11,7 +11,6 @@ export class TodoRepository extends Repository<Todo> {
   async createTodo(args: ICreateTodo): Promise<Todo> {
     const newTodo = this.create();
 
-    console.log('args', args);
     newTodo.name = args.name;
     newTodo.description = args.description;
 
@@ -47,6 +46,28 @@ export class TodoRepository extends Repository<Todo> {
     } catch (error) {
       throw new HttpException(
         { message: 'Failed update todo' },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    return todo;
+  }
+
+  async removeTodo(id: string): Promise<Todo> {
+    const todo = await this.findOne({
+      where: { id },
+    });
+    if (!todo || todo.deleted_at) {
+      throw new HttpException(
+        { message: 'Data tidak ditemukan' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    try {
+      await todo.remove();
+    } catch (error) {
+      throw new HttpException(
+        { message: 'Failed remove todo' },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }

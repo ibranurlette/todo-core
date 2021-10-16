@@ -19,15 +19,7 @@ export class TodoService {
     return await this.todoRepository.updateTodo(id, args);
   }
 
-  // findAll() {
-  //   return `This action returns all todo`;
-  // }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} todo`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} todo`;
-  // }
+  async removeTodo(id: string) {
+    return await this.todoRepository.removeTodo(id);
+  }
 }
