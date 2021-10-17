@@ -80,12 +80,16 @@ export class TodosListService {
       );
     }
 
+    const sortData = data.sort((a, b) => {
+      return b.created_at - a.created_at;
+    });
+
     return {
       page: page,
       limit: limit,
       pages: Math.ceil(total / limit),
       total,
-      data: data,
+      data: sortData,
     };
   }
 }
